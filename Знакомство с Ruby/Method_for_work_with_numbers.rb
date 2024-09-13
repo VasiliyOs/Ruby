@@ -21,3 +21,20 @@ end
 print ("Напишите число, сумму непростых делителей которого вы хотите узнать:")
 num_neprost_del = gets.to_i
 print ("Ответ: #{Sum_neprost_del(num_neprost_del)}\n")
+
+
+def Sum_digits_more_3 num
+	kol = 0
+	while (num!=0)
+		if (num%10>3)
+			kol+=1
+		end
+		num=num/10
+	end
+	return kol
+end
+
+
+print ("Напишите число, где вы хотите узнать количество цифр, больше чем 3:")
+num_kol_digits = gets.to_i
+print ("Ответ: #{Sum_digits_more_3(num_kol_digits)}\n")
