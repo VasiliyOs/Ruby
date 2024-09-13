@@ -17,3 +17,13 @@ case language
     else
         print "Я такого языка не знаю."
 end
+
+
+print "Введите комманду Ruby:"
+command_ruby = STDIN.gets.chomp #cохраняем кооманду в переменную
+print "\nА теперь введите комманду OC:"
+command_os = STDIN.gets.chomp #cохраняем кооманду в переменную
+
+eval(command_ruby) #Выполняет комманду Ruby
+
+system(command_os) #Выполняет комманду ОС
