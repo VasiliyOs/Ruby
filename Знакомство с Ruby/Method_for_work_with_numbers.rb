@@ -38,3 +38,40 @@ end
 print ("Напишите число, где вы хотите узнать количество цифр, больше чем 3:")
 num_kol_digits = gets.to_i
 print ("Ответ: #{Sum_digits_more_3(num_kol_digits)}\n")
+
+
+#В данном методе используется функция простоты из первого метода
+def Vzaimn_prostota num1, num2
+	minumum = [num1,num2].min	
+	flag = 1
+	for i in(2..minumum)
+		if (num1%i==0) && (num2%i==0)
+			flag = 0
+		end
+	end
+	return flag
+end
+def Sum_prost_digits num
+	sum = 0
+	while (num!=0)
+		if (Prost(num%10))
+			sum+=num%10
+		end
+		num=num/10
+	end
+	return sum
+end
+
+
+print ("Напишите число, у которого нужно: найти количество чисел, не являющихся делителями числа, не взаимно простых с ним и взаимнопростых с суммой простых цифр числа: ")
+number = gets.to_i
+kol_good_numbers = 0
+for i in(2..number-1)
+	if (number%i != 0)
+		if (Vzaimn_prostota(number,i)==0) && (Vzaimn_prostota(i,Sum_prost_digits(number))==1)
+			print i
+			kol_good_numbers+=1
+		end
+	end
+end
+print ("Ответ: #{kol_good_numbers}\n")
