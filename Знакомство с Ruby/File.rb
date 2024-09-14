@@ -1,4 +1,4 @@
-def Mininal_element arr
+def mininal_element arr
 	minim=arr[0]
 	for i in(0..arr.size-1)
 		if (arr[i] < minim)
@@ -9,7 +9,7 @@ def Mininal_element arr
 end
 
 
-def Element_print arr
+def elements_print arr
 	for i in(0..arr.size-1)
 		print "#{arr[i]}  "
 	end
@@ -17,7 +17,7 @@ def Element_print arr
 end
 
 
-def First_positive_elem arr
+def first_positive_elem arr
 	for i in(0..arr.size-1)
 		if (arr[i] > 0)
 			return arr[i]
@@ -42,10 +42,10 @@ print massive
 
 method_name = ARGV[1]
 case method_name
-	when 'Minimal_element'
-		print "Минимальный элемент в файле: #{Mininal_element(massive)}\n"
-	when 'Element_print'
-		print "Вывод массива из файла:#{Element_print(massive)}\n"
-	when "First_positive_elem"
-		print "Первый положительный элемент в файле: #{First_positive_elem(massive)}\n"
+	when 'minimal_element'
+		print "Минимальный элемент в файле: #{mininal_element(massive)}\n"
+	when 'elements_print'
+		print "Вывод массива из файла:#{elements_print(massive)}\n"
+	when "first_positive_elem"
+		print "Первый положительный элемент в файле: #{first_positive_elem(massive)}\n"
 end
