@@ -1,6 +1,6 @@
 array = [-10, 5, 3, 4, 0]
 
-def Mininal_element arr
+def minimal_element arr
 	minim=arr[0]
 	i=0
 	while (arr[i] != nil)
@@ -11,10 +11,10 @@ def Mininal_element arr
 	end
 	return minim
 end
-print "Вывожу минимальный элемент массива: #{Mininal_element(array)}\n"
+print "Вывожу минимальный элемент массива: #{minimal_element(array)}\n"
 
 
-def Element_print arr
+def elements_print arr
 	i=0
 	print "Вывожу элементы массива:"
 	while (arr[i] != nil)
@@ -23,10 +23,10 @@ def Element_print arr
 	end
 	print "\n"
 end
-Element_print(array)
+Elements_print(array)
 
 
-def First_positive_elem arr
+def first_positive_elem arr
 	i=0
 	while (arr[i] != nil)
 		if (arr[i] > 0)
@@ -36,4 +36,4 @@ def First_positive_elem arr
 		i+=1
 	end
 end
-print "Вывожу первый положительный элемент массива: #{First_positive_elem(array)}"
+print "Вывожу первый положительный элемент массива: #{first_positive_elem(array)}"
