@@ -1,5 +1,4 @@
 class Student
-	attr_accessor :id, :first_name, :second_name, :third_name, :telephone, :telegram, :git
 	def id
 		@id
 	end
