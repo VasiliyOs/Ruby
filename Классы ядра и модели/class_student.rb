@@ -1,6 +1,5 @@
 class Student
-	attr_reader :id, :first_name, :second_name, :third_name, :telephone, :telegram, :git
-	attr_writer :id, :first_name, :second_name, :third_name, :telephone, :telegram, :git
+	attr_accessor :id, :first_name, :second_name, :third_name, :telephone, :telegram, :git
 	def initialize(first_name,second_name,third_name,id = nil,telephone = nil,telegram = nil,git = nil)
 		self.id = id
 		self.first_name = first_name
