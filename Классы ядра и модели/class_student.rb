@@ -51,4 +51,29 @@ class Student
 		self.telegram = telegram
 		self.git = git
 	end
+	def print_student
+		print ("Имя студента:#{self.first_name}\n")
+		print ("Фамилия студента:#{self.second_name}\n")
+		print ("Отчество студента:#{self.third_name}\n")
+		if (self.id == nil)
+			print ("ID студента: ОТСУТСТВУЕТ\n")
+		else
+			print ("ID студента:#{self.id}\n")
+		end
+		if (self.telephone == nil)
+			print ("Телефон студента: ОТСУТСТВУЕТ\n")
+		else
+			print ("Телефон студента:#{self.telephone}\n")
+		end
+		if (self.telegram == nil)
+			print ("Телеграм студента: ОТСУТСТВУЕТ\n")
+		else
+			print ("Телеграм студента:#{self.telegram}\n")
+		end
+		if (self.git == nil)
+			print ("Гит студента: ОТСУТСТВУЕТ\n")
+		else
+			print ("Гит студента:#{self.git}\n\n\n")
+		end
+	end
 end
