@@ -1,6 +1,6 @@
 class Student
 	attr_accessor :id, :first_name, :second_name, :third_name, :telephone, :telegram, :git
-	def initialize(first_name,second_name,third_name,id = nil,telephone = nil,telegram = nil,git = nil)
+	def initialize(first_name, second_name, third_name, id: nil, telephone: nil, telegram: nil, git: nil)
 		self.id = id
 		self.first_name = first_name
 		self.second_name = second_name
@@ -31,7 +31,8 @@ class Student
 		if (self.git == nil)
 			print ("Гит студента: ОТСУТСТВУЕТ\n")
 		else
-			print ("Гит студента:#{self.git}\n\n\n")
+			print ("Гит студента:#{self.git}\n")
 		end
+		print ("\n\n")
 	end
 end
