@@ -1,13 +1,13 @@
 class Student
 	attr_accessor :id, :first_name, :second_name, :third_name, :telephone, :telegram, :git
 	def initialize(info = {})
-		self.id = info[:id] || "ОТСУТСТВУЕТ"
+		self.id = info[:id] || nil
 		self.first_name = info[:first_name]
 		self.second_name = info[:second_name]
 		self.third_name = info[:third_name]
-		self.telephone = info[:telephone] || "ОТСУТСТВУЕТ"
-		self.telegram = info[:telegram] || "ОТСУТСТВУЕТ"
-		self.git = info[:git] || "ОТСУТСТВУЕТ"
+		self.telephone = info[:telephone] || nil
+		self.telegram = info[:telegram] || nil
+		self.git = info[:git] || nil
 	end
 	def print_student
 		print ("Имя студента:#{self.first_name}\n")
