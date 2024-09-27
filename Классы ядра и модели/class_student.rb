@@ -1,11 +1,19 @@
 class Student
+	def check_telephone?(phone_number)
+  		phone_regex = /^(?:\+7|8)\s*\(?(?:\d{3})\)?\s*\d{3}[-\s]?\d{2}[-\s]?\d{2}$/
+  		!!(phone_number =~ phone_regex)
+	end
 	attr_accessor :id, :first_name, :second_name, :third_name, :telephone, :telegram, :git
 	def initialize(first_name, second_name, third_name, info = {})
 		self.id = info[:id] 
 		self.first_name = first_name
 		self.second_name = second_name
 		self.third_name = third_name
-		self.telephone = info[:telephone]
+		if (check_telephone?(info[:telephone]) == true)
+			self.telephone = info[:telephone]
+		else
+			self.telephone = nil
+		end
 		self.telegram = info[:telegram]
 		self.git = info[:git]
 	end
