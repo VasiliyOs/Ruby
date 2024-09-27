@@ -66,6 +66,30 @@ class Student
 			self.telegram = nil
 		end
 	end
+	def has_git
+		if (self.git != nil)
+			return true
+		else
+			return false
+	end
+	def has_telephone
+		if (self.telephone != nil)
+			return true
+		else
+			return false
+	end
+	def has_tg
+		if (self.telegram != nil)
+			return true
+		else
+			return false
+	end
+	def validate
+		has_git and (has_telephone or has_tg)
+			return true
+		else
+			return false
+	end
 	def to_s
 		"Имя студента:#{self.first_name}\n Фамилия студента:#{self.second_name}\n Отчество студента:#{self.third_name}\n ID студента:#{self.id}\n Телефон студента:#{self.telephone}\n Телеграм студента:#{self.telegram}\n Гит студента:#{self.git}\n\n\n"
 	end
