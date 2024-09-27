@@ -50,4 +50,6 @@ class Student
 		self.telegram = telegram
 		self.git = git
 	end
+	def to_s
+		"Имя студента:#{self.first_name}\n Фамилия студента:#{self.second_name}\n Отчество студента:#{self.third_name}\n ID студента:#{self.id}\n Телефон студента:#{self.telephone}\n Телеграм студента:#{self.telegram}\n Гит студента:#{self.git}\n"
 end
