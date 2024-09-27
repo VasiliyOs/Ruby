@@ -3,11 +3,11 @@ class Student
 		id_regex = /\A\d+\z/
 		id = id.to_s
 		!!(id =~ id_regex)
-	end
+		end
 	def check_first_name?(first_name)
 		fname_regex = /\A[А-ЯЁ][а-яё\-]+\z/
 		!!(first_name =~ fname_regex)
-	end
+		end
 	def check_second_name?(second_name)
 		sname_regex = /\A[А-ЯЁ][а-яё\-]+\z/
 		!!(second_name =~ sname_regex)
@@ -17,80 +17,96 @@ class Student
 		!!(third_name =~ tname_regex)
 	end
 	def check_telephone?(phone_number)
-  		phone_regex = /^(?:\+7|8)\s*\(?(?:\d{3})\)?\s*\d{3}[-\s]?\d{2}[-\s]?\d{2}$/
-  		!!(phone_number =~ phone_regex)
+		phone_regex = /^(?:\+7|8)\s*\(?(?:\d{3})\)?\s*\d{3}[-\s]?\d{2}[-\s]?\d{2}$/
+		!!(phone_number =~ phone_regex)
 	end
 	def check_github?(git)
-  		github_regex = /^github\.com\/[A-Za-z0-9._-]+\/?$/
-  		!!(git =~ github_regex)
+		github_regex = /^github\.com\/[A-Za-z0-9._-]+\/?$/
+		!!(git =~ github_regex)
 	end
 	def check_telegram?(telegram)
-  		telegram_profile_regex = /\A@[a-zA-Zа-яА-Я0-9._]+\z/
-  		!!(telegram =~ telegram_profile_regex)
+		telegram_profile_regex = /\A@[a-zA-Zа-яА-Я0-9._]+\z/
+		!!(telegram =~ telegram_profile_regex)
 	end
-	attr_accessor :id, :first_name, :second_name, :third_name, :telephone, :telegram, :git
+
+
+	attr_accessor :id, :first_name, :second_name, :third_name
+	attr_reader :telegram, :git, :telephone
+
+
 	def initialize(first_name, second_name, third_name, info = {})
 		if (check_id?(info[:id]) == true)
 			self.id = info[:id]
 		else
-			self.id = nil
+		  	self.id = nil
 		end
 		if (check_first_name?(first_name) == true)
-			self.first_name = first_name
+		  	self.first_name = first_name
 		else
-			first_name = "ERROR"
+		  	first_name = "ERROR"
 		end
 		if (check_second_name?(second_name) == true)
-			self.second_name = second_name
+		  	self.second_name = second_name
 		else
-			second_name = "ERROR"
+		  	second_name = "ERROR"
 		end
 		if (check_third_name?(third_name) == true)
-			self.third_name = third_name
+		  	self.third_name = third_name
 		else
-			first_third = "ERROR"
+		  	third_name = "ERROR"
 		end
 		if (check_telephone?(info[:telephone]) == true)
-			self.telephone = info[:telephone]
+		  	@telephone = info[:telephone]
 		else
-			self.telephone = nil
+		  	@telephone = nil
 		end
 		if (check_github?(info[:git]) == true)
-			self.git = info[:git]
+		  	@git = info[:git]
 		else
-			self.git = nil
+		  	@git = nil
 		end
 		if (check_telegram?(info[:telegram]) == true)
-			self.telegram = info[:telegram]
+		  	@telegram = info[:telegram]
 		else
-			self.telegram = nil
+		  	@telegram = nil
 		end
 	end
+
+
 	def has_git
-		if (self.git != nil)
-			return true
-		else
-			return false
+		@git != nil
 	end
 	def has_telephone
-		if (self.telephone != nil)
-			return true
-		else
-			return false
+		@telephone != nil
 	end
 	def has_tg
-		if (self.telegram != nil)
-			return true
-		else
-			return false
+		@telegram != nil
 	end
 	def validate
-		has_git and (has_telephone or has_tg)
-			return true
-		else
-			return false
+		has_git && (has_telephone || has_tg)
 	end
+
+
+	def set_contacts(git, telegram, telephone)
+		if (check_github?(git) == true)
+		  	@git = git
+		else
+		  	@git = nil
+		end
+		if (check_telegram?(telegram) == true)
+		  	@telegram = telegram
+		else
+		  	@telegram = nil
+		end
+		if (check_telephone?(telephone) == true)
+		  	@telephone = telephone
+		else
+		  	@telephone = nil
+		end
+	end
+
+
 	def to_s
-		"Имя студента:#{self.first_name}\n Фамилия студента:#{self.second_name}\n Отчество студента:#{self.third_name}\n ID студента:#{self.id}\n Телефон студента:#{self.telephone}\n Телеграм студента:#{self.telegram}\n Гит студента:#{self.git}\n\n\n"
+		"Имя студента:#{self.first_name}\n Фамилия студента:#{self.second_name}\n Отчество студента:#{self.third_name}\n ID студента:#{self.id}\n Телефон студента:#{@telephone}\n Телеграм студента:#{self.telegram}\n Гит студента:#{self.git}\n\n\n"
 	end
 end
