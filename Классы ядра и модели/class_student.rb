@@ -1,30 +1,54 @@
 class Student
-	def check_telephone?(phone_number)
-  		phone_regex = /^(?:\+7|8)\s*\(?(?:\d{3})\)?\s*\d{3}[-\s]?\d{2}[-\s]?\d{2}$/
-  		!!(phone_number =~ phone_regex)
-	end
 	attr_accessor :id, :first_name, :second_name, :third_name, :telephone, :telegram, :git
-	def initialize(info = {})
-		self.id = info[:id] || nil
-		self.first_name = info[:first_name]
-		self.second_name = info[:second_name]
-		self.third_name = info[:third_name]
-		if (check_telephone?(info[:telephone]) == true)
-			self.telephone = info[:telephone]
-		else
-			self.telephone = nil
-		end
-		self.telegram = info[:telegram] || nil
-		self.git = info[:git] || nil
+	def id
+		@id
 	end
-	def print_student
-		print ("Имя студента:#{self.first_name}\n")
-		print ("Фамилия студента:#{self.second_name}\n")
-		print ("Отчество студента:#{self.third_name}\n")
-		print ("ID студента:#{self.id}\n")
-		print ("Телефон студента:#{self.telephone}\n")
-		print ("Телеграм студента:#{self.telegram}\n")
-		print ("Гит студента:#{self.git}\n")
-		print ("\n\n")
+	def id=(id)
+		@id = id
+	end
+	def first_name
+		@first_name
+	end
+	def first_name=(first_name)
+		@first_name = first_name
+	end
+	def second_name
+		@second_name
+	end
+	def second_name=(second_name)
+		@second_name = second_name
+	end
+	def third_name
+		@third_name
+	end
+	def third_name=(third_name)
+		@third_name = third_name
+	end
+	def telephone
+		@telephone
+	end
+	def telephone=(telephone)
+		@telephone=telephone
+	end
+	def telegram
+		@telegram
+	end
+	def telegram=(telegram)
+		@telegram=telegram
+	end
+	def git
+		@git
+	end
+	def git=(git)
+		@git=git
+	end
+	def initialize(first_name,second_name,third_name,id = nil,telephone = nil,telegram = nil,git = nil)
+		self.id = id
+		self.first_name = first_name
+		self.second_name = second_name
+		self.third_name = third_name
+		self.telephone = telephone
+		self.telegram = telegram
+		self.git = git
 	end
 end
