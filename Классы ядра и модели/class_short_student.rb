@@ -1,46 +1,51 @@
-class Student_short
+require './super_class_student.rb'
+class Student_short < People
 
-	attr_accessor :id, :second_name_and_initials, :git, :contact
+	attr_accessor :name, :contact
 
-	def initialize(id: , second_name_and_initials: , git: , contact: )
-		self.id = id
-		self.second_name_and_initials = second_name_and_initials
-		self.git = git
+	def initialize(id:, name:, git:, contact:)
+	    initials = name.split[1].split('.')
+	    second_name, first_name, third_name = name.split[0], initials[0], initials[1]
+	    super(second_name: second_name, first_name: first_name, third_name: third_name, id: id, git: git)
 		self.contact = contact
 	end
 
-	def Student_short.string_parsing(str)
-		if str.empty? || str.nil?
-			raise ArgumentError.new("Строка пуста!")
-		end
-		student_atribute = {}
-		str.split(';').each do |pars_str|
-			key, val = pars_str.split(':').map(&:strip)
-			case key.downcase
-				when 'id'
-					student_atribute[:id] = val
-				when 'second_name_and_initials'
-					student_atribute[:second_name_and_initials] = val
-				when 'git'
-					student_atribute[:git] = val
-				when 'contact'
-					student_atribute[:contact] = val
-			end
-		end
-		return student_atribute
+
+	def Student_short.create_from_string(id:, data:)
+	    student_short_init = {}
+
+	    params = Student_short.parse_string_params(data)
+
+	    student_short_init[:id] = id
+	    student_short_init[:name] = params[0] + ' ' + params[1]
+	    student_short_init[:git] = params[2]
+	    student_short_init[:contact] = params[3..].join('')
+
+	    self.new(**student_short_init)
+      
+  	end 
+  	def self.parse_string_params(str_params)
+    	return str_params.split
+  	end
+
+
+	def Student_short.create_from_student(stud)
+		student_short_atribute = {}
+		student_short_atribute[:id] = stud.get_id
+		student_short_atribute[:name] = stud.get_second_name_and_initials
+		student_short_atribute[:git] = stud.get_git
+		student_short_atribute[:contact] = stud.get_contact
+
+		return student_short_atribute
 	end
+
 
 	def get_info
-		print ("ФИО:#{second_name_and_initials}; Git:#{git}; Контакт:#{contact}; \n \n")
-	end
-
-	def Student_short.create_from_pars_string(str)
-		pars_str = Student_short.string_parsing(str)
-		Student_short.new(**pars_str)
+		print ("ФИО:#{name}; Git:#{git}; Контакт:#{contact}; \n \n")
 	end
 
 
 	def to_s
-		"ФИО студента:#{self.second_name_and_initials}\n  ID студента:#{self.id}\n  Контакт студента:#{self.contact}\n  Гит студента:#{self.git}\n\n\n"
+		"ФИО студента:#{self.name}\n  ID студента:#{self.id}\n  Контакт студента:#{self.contact}\n  Гит студента:#{self.git}\n\n\n"
 	end
 end
