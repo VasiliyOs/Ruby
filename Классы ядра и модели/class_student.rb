@@ -1,3 +1,4 @@
+require './super_class_student.rb'
 class Student < People
 
 	attr_reader :telegram, :email, :telephone
