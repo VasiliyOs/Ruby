@@ -99,6 +99,28 @@ class Student
     end
   end
 
+  def has_git
+    if self.git != nil
+      true
+    else
+      false
+    end
+  end
+  def has_contact
+    if self.telephone != nil || self.telegram != nil || self.email != nil
+      true
+    else
+      false
+    end
+  end
+  def validate
+    if has_git and has_contact
+      true
+    else
+      false
+    end
+  end
+
 
   def initialize(first_name,second_name,third_name,id: nil,telephone: nil,telegram: nil,email: nil,git: nil)
     self.id = id
