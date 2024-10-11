@@ -156,6 +156,30 @@ class Student
     self.email = email
   end
 
+  def get_info
+    return "ФИО:#{self.second_name} #{self.first_name[0]}.#{self.third_name[0]}.;  Git:#{self.git};  #{get_contact[0]}:#{get_contact[1]}"
+  end
+
+  def full_name
+    return "#{self.second_name} #{self.first_name[0]}.#{self.third_name[0]}."
+  end
+
+  def get_contact
+    if self.telephone != nil
+      contact_name = "Телефон"
+      contact = self.telephone
+    elsif self.telegram != nil
+      contact_name = "Телеграм"
+      contact = self.telegram
+    elsif self.email != nil
+      contact_name = "Email"
+      contact = email
+    end
+    return contact_name, contact
+  end
+  
+  #Геттер гита и есть метод получения гита
+
   def initialize(first_name,second_name,third_name,id: nil,telephone: nil,telegram: nil,email: nil,git: nil)
     self.id = id
     self.first_name = first_name
