@@ -121,6 +121,35 @@ class Student
     end
   end
 
+  def Student.pars(str)
+    if str.empty? || str.nil?
+      raise ArgumentError.new("Строка пуста!")
+    end
+    first_name, second_name, third_name, id, telephone, email, git, telegram = nil
+    str.split(';').each do |pars_str|
+      key, val = pars_str.split(':').map(&:strip)
+      case key.downcase
+      when 'first_name'
+        first_name = val
+      when 'second_name'
+        second_name = val
+      when 'third_name'
+        third_name = val
+      when 'id'
+        id = val
+      when 'email'
+        email = val
+      when 'telephone'
+        telephone = val
+      when 'git'
+        git = val
+      when 'telegram'
+        telegram = val
+      end
+    end
+    return Student.new(first_name, second_name, third_name, id: id, email: email, telephone: telephone, git: git, telegram: telegram)
+  end
+
   def set_contact(telephone, telegram, email)
     self.telephone = telephone
     self.telegram = telegram
