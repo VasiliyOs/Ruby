@@ -1,7 +1,22 @@
 class People
 
-  attr_reader :id, :first_name, :second_name, :third_name, :git
+  attr_reader :id, :first_name, :second_name, :third_name, :git, :contact
 
+  def People.check_telephone?(phone_number)
+    phone_regex = /^(?:\+7|8)\s*\(?(?:\d{3})\)?\s*\d{3}[-\s]?\d{2}[-\s]?\d{2}$/
+    return true if phone_number.nil?
+    phone_number =~ phone_regex
+  end
+  def People.check_telegram?(telegram)
+    telegram_regex = /^@[a-zA-Z0-9._]{5,32}$/
+    return true if telegram.nil?
+    telegram =~ telegram_regex
+  end
+  def People.check_mail?(email)
+    email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    return true if email.nil?
+    email =~ email_regex
+  end
   def People.check_id?(id)
     id_regex = /\A\d+\z/
     return true if id.nil?
@@ -26,6 +41,29 @@ class People
     git =~ github_regex
   end
 
+
+  def get_contact
+    if self.contact != nil and People.check_telephone?(self.contact)
+      contact_name = "Телефон"
+      contact = self.contact
+    elsif self.telegram != nil and People.check_telegram?(self.contact)
+      contact_name = "Телеграм"
+      contact = self.telegram
+    elsif self.email != nil and People.check_mail?(self.contact)
+      contact_name = "Email"
+      contact = self.email
+    end
+    return contact_name, contact
+  end
+
+
+  def contact=(contact)
+    if People.check_telephone?(contact) or People.check_telegram?(contact) or People.check_mail?(contact)
+      @contact = contact
+    else
+      raise ArgumentError.new("Указан неправильный контакт!")
+    end
+  end
   def first_name=(first_name)
     if People.check_first_name?(first_name)
       @first_name = first_name
@@ -62,6 +100,8 @@ class People
     end
   end
 
+  protected :contact=
+
   def has_git
     if self.git != nil
       true
@@ -69,6 +109,21 @@ class People
       false
     end
   end
+  def has_contact
+    if self.contact != nil
+      true
+    else
+      false
+    end
+  end
+  def validate
+    if has_git and has_contact
+      true
+    else
+      false
+    end
+  end
+
   def full_name
     return "#{self.second_name} #{self.first_name[0]}.#{self.third_name[0]}."
   end
@@ -96,12 +151,13 @@ class People
     return People.new(first_name, second_name, third_name, id: id, git: git)
   end
 
-  def initialize(first_name,second_name,third_name,id: nil,git: nil)
+  def initialize(first_name,second_name,third_name, id: nil, git: nil, contact: nil)
     self.id = id
     self.first_name = first_name
     self.second_name = second_name
     self.third_name = third_name
     self.git = git
+    self.contact = contact
   end
 
   def to_s
