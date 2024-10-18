@@ -13,40 +13,16 @@ class Student < People
     self.telegram = telegram
     self.email = email
   end
-  def get_contact
-    if self.telephone != nil
-      contact_name = "Телефон"
-      contact = self.telephone
-    elsif self.telegram != nil
-      contact_name = "Телеграм"
-      contact = self.telegram
-    elsif self.email != nil
-      contact_name = "Email"
-      contact = self.email
-    end
-    return contact_name, contact
-  end
-  def get_info
-    return "ФИО:#{full_name}; Git:#{self.git}; #{get_contact[0]}:#{get_contact[1]}"
-  end
+
   def full_name
-    return "#{self.second_name} #{self.first_name[0]}.#{self.third_name[0]}."
+    super
+  end
+  def get_contact
+    super
   end
 
-  def Student.check_telephone?(phone_number)
-    phone_regex = /^(?:\+7|8)\s*\(?(?:\d{3})\)?\s*\d{3}[-\s]?\d{2}[-\s]?\d{2}$/
-    return true if phone_number.nil?
-    phone_number =~ phone_regex
-  end
-  def Student.check_telegram?(telegram)
-    telegram_regex = /^@[a-zA-Z0-9._]{5,32}$/
-    return true if telegram.nil?
-    telegram =~ telegram_regex
-  end
-  def Student.check_mail?(email)
-    email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    return true if email.nil?
-    email =~ email_regex
+  def get_info
+    return "ФИО:#{full_name}; Git:#{self.git}; #{get_contact[0]}:#{get_contact[1]}"
   end
 
   def email=(email)
@@ -70,19 +46,9 @@ class Student < People
       raise ArgumentError.new("Указан неправильный Telegram пользователя!")
     end
   end
-  def has_contact
-    if self.telephone != nil || self.telegram != nil || self.email != nil
-      true
-    else
-      false
-    end
-  end
+
   def validate
-    if has_git and has_contact
-      true
-    else
-      false
-    end
+    super
   end
 
   def Student.pars(str)
