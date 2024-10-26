@@ -10,7 +10,7 @@ class Student_short < People
     self.contact_name = contact_name
   end
 
-  private_class_method :new
+  private_class_method :initialize
 
   def full_name
     super
@@ -36,10 +36,10 @@ class Student_short < People
         telegram = val
       end
     end
-    return super.git, "#{get_contact(telephone, telegram, email)[0]}", "#{get_contact(telephone,telegram, email)[1]}", super.second_name, super.first_name, super.third_name
+    return super.git, "#{get_pars_contact(telephone, telegram, email)[0]}", "#{get_pars_contact(telephone,telegram, email)[1]}", super.second_name, super.first_name, super.third_name
   end
 
-  def Student_short.get_contact(telephone, telegram, email) #Метод класса так как я его должен использовать без экземпляра, он применяется в методе класса pars для парса строки и нахождения контакта. Вроде можно добавть телефон и другие контакты и использовать super. Ещё можно дополнить метод pars и находить контакт подругому.
+  def Student_short.get_pars_contact(telephone, telegram, email) #Метод класса так как я его должен использовать без экземпляра, он применяется в методе класса pars для парса строки и нахождения контакта. Вроде можно добавть телефон и другие контакты и использовать super. Ещё можно дополнить метод pars и находить контакт подругому.
     if telephone != nil
       contact_name = "Телефон"
       contact = telephone
