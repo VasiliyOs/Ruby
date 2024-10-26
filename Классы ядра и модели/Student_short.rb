@@ -10,7 +10,7 @@ class Student_short < People
     self.contact_name = contact_name
   end
 
-  private_class_method :initialize
+  private_class_method :new
 
   def full_name
     super
