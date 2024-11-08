@@ -18,5 +18,13 @@ class Array_handler
   def min_max
     [array.min, array.max]
   end
+
+  def reduce(first_index = 0)
+    accum = []
+    array[first_index..-1].each do |elem|
+      accum.push(yield(elem,first_index))
+    end
+    accum
+  end
 end
 
