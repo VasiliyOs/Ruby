@@ -32,3 +32,13 @@ def find_most_frequent_elem_indexes(arr)
   end
   indices = arr.each_index.select {|index| arr[index] == max_el}
 end
+
+  def find_el_del_on_self_index(arr)
+  new_arr = []
+  arr.each_with_index do |num,index|
+    if num%(index+1)==0 && arr.count(num)==1
+      yield(new_arr,num)
+    end
+  end
+  new_arr
+end
