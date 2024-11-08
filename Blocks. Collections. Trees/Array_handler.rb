@@ -14,5 +14,9 @@ class Array_handler
     end
     new_arr
   end
+
+  def min_max
+    [array.min, array.max]
+  end
 end
 
