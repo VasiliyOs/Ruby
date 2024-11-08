@@ -20,4 +20,15 @@ def find_max_odd(array)
   yield(max_odds)
 end
 
-
+def find_most_frequent_elem_indexes(arr)
+  max_count = 0
+  max_el = nil
+  arr.each do |el|
+    count = arr.count(el)
+    if yield(max_count,count)
+      max_count = count
+      max_el = el
+    end
+  end
+  indices = arr.each_index.select {|index| arr[index] == max_el}
+end
