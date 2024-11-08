@@ -13,3 +13,9 @@ def find_2_max_elem(array)
   numbers = array.sort
   yield(numbers)
 end
+
+def find_max_odd(array)
+  odd_numbers = array.select {|num| num.odd?}
+  max_odds = odd_numbers.sort
+  yield(max_odds)
+end
