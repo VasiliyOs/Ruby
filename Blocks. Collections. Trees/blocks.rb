@@ -8,3 +8,8 @@ def backwards_elem(array)
   yield(min_index,max_index,new_arr)
   new_arr
 end
+
+def find_2_max_elem(array)
+  numbers = array.sort
+  yield(numbers)
+end
