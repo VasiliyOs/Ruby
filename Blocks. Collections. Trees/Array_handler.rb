@@ -34,5 +34,15 @@ class Array_handler
       end
     end
   end
+
+  def any?
+    flag = false
+    array.each do |elem|
+      if yield(elem)
+        flag=true
+      end
+    end
+    flag
+  end
 end
 
