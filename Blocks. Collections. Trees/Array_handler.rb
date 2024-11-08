@@ -26,5 +26,13 @@ class Array_handler
     end
     accum
   end
+
+  def find_index
+    array.each_with_index do |elem,index|
+      if yield(elem)
+        return index
+      end
+    end
+  end
 end
 
