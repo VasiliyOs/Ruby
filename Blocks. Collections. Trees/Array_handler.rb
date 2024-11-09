@@ -5,6 +5,8 @@ class Array_handler
     self.array = array
   end
 
+  private :array=,:array
+
   def find_all
     new_arr = []
     array.each do |elem|
@@ -19,10 +21,9 @@ class Array_handler
     [array.min, array.max]
   end
 
-  def reduce(first_index = 0)
-    accum = []
-    array[first_index..-1].each do |elem|
-      accum.push(yield(elem,first_index))
+  def reduce(accum = 0)
+    array.each do |elem|
+      accum = yield(elem,accum)
     end
     accum
   end
@@ -35,14 +36,43 @@ class Array_handler
     end
   end
 
-  def any?
-    flag = false
-    array.each do |elem|
-      if yield(elem)
-        flag=true
+  def none?
+    flag = true
+    if !block_given?
+      flag=true
+    else
+      array.each do |elem|
+        if yield(elem)
+          flag=false
+        end
       end
     end
     flag
   end
+
+  def any?
+    flag = false
+    if !block_given?
+      flag=true
+    else
+      array.each do |elem|
+        if yield(elem)
+          flag=true
+        end
+      end
+    end
+    flag
+  end
+
+  def to_s
+    array
+  end
 end
+arr_handler = Array_handler.new([1,7,3,5,9])
+"p arr_handler.find_all{|elem| elem%2==0}
+p arr_handler.min_max
+p arr_handler.reduce(10){|elem,accum| accum+elem*2}
+p arr_handler.find_index{|elem| elem%2==0}
+p arr_handler.any?{|elem| elem%5==0}
+p arr_handler.none?{|elem| elem%2==0}"
 
