@@ -17,6 +17,26 @@ class Array_handler
     new_arr
   end
 
+  def min
+    minim = array[0]
+    array.each do |elem|
+      if elem<minim
+        minim=elem
+      end
+    end
+    minim
+  end
+
+  def max
+    maxim = array[0]
+    array.each do |elem|
+      if elem>maxim
+        maxim=elem
+      end
+    end
+    maxim
+  end
+
   def min_max
     [array.min, array.max]
   end
@@ -69,10 +89,9 @@ class Array_handler
   end
 end
 arr_handler = Array_handler.new([1,7,3,5,9])
-"p arr_handler.find_all{|elem| elem%2==0}
+p arr_handler.find_all{|elem| elem%2==0}
 p arr_handler.min_max
 p arr_handler.reduce(10){|elem,accum| accum+elem*2}
 p arr_handler.find_index{|elem| elem%2==0}
 p arr_handler.any?{|elem| elem%5==0}
-p arr_handler.none?{|elem| elem%2==0}"
-
+p arr_handler.none?{|elem| elem%2==0}
