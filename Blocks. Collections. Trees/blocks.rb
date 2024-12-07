@@ -5,45 +5,32 @@ def backwards_elem(array)
   if min_index > max_index
     max_index, min_index = min_index, max_index
   end
-  yield(min_index,max_index,new_arr)
+  new_arr[min_index+1..max_index-1]=new_arr[min_index+1..max_index-1].reverse
   new_arr
 end
 
 def find_2_max_elem(array)
   numbers = array.sort
-  yield(numbers)
+  numbers.last(2)
 end
 
 def find_max_odd(array)
   odd_numbers = array.select {|num| num.odd?}
   max_odds = odd_numbers.sort
-  yield(max_odds)
+  max_odds.last(1)
 end
 
 def find_most_frequent_elem_indexes(arr)
-  max_count = 0
-  max_el = nil
-  arr.each do |el|
-    count = arr.count(el)
-    if yield(max_count,count)
-      max_count = count
-      max_el = el
-    end
-  end
-  indices = arr.each_index.select {|index| arr[index] == max_el}
+  most_frequent_element = arr.max_by{|element| arr.select {|x| x == element}.size}
+  indexes = (0...arr.size).select {|index| arr[index] == most_frequent_element}
 end
 
-  def find_el_del_on_self_index(arr)
-  new_arr = []
-  arr.each_with_index do |num,index|
-    if num%(index+1)==0 && arr.count(num)==1
-      yield(new_arr,num)
-    end
-  end
-  new_arr
+def find_el_del_on_self_index(arr)
+  indexes = (0...arr.size).select{|index| arr[index] % (index+1)==0 and arr.count(arr[index])==1}
+  arr.values_at(*indexes)
 end
 
-ef input_arr
+def input_arr
   puts "Введите целочисленный массив:"
   array = gets.chomp.split.map(&:to_i)
 end
@@ -78,15 +65,15 @@ def do_task(choice_task,arr)
   if not(arr.empty?)
     case choice_task
     when 1
-      p "Массив с элементами наоборот между максимальным и минимальным:#{backwards_elem(arr){|min_index,max_index,new_arr| new_arr[min_index+1..max_index-1]=new_arr[min_index+1..max_index-1].reverse}}"
+      p "Массив с элементами наоборот между максимальным и минимальным:#{backwards_elem(arr)}"
     when 2
-      p "2 максимальных элемента массива:#{find_2_max_elem(arr){|numbers| numbers.last(2)}}"
+      p "2 максимальных элемента массива:#{find_2_max_elem(arr)}"
     when 3
-      puts "Максимальный нечётный элемент:#{find_max_odd(arr){|max_odds| max_odds.last(1)}}"
+      puts "Максимальный нечётный элемент:#{find_max_odd(arr)}"
     when 4
-      p "Индексы элемента, который чаще всего встречается:#{find_most_frequent_elem_indexes(arr){|max_count,count| max_count<count}}"
+      p "Индексы элемента, который чаще всего встречается:#{find_most_frequent_elem_indexes(arr).inspect}"
     when 5
-      p "Элементы, который делятся на свой номер и встречаются 1 раз:#{find_el_del_on_self_index(arr){|new_arr,num| new_arr.push(num)}}"
+      p "Элементы, который делятся на свой номер и встречаются 1 раз:#{find_el_del_on_self_index(arr)}"
     when 0
       puts "Выбор задачи отменён!"
     else
