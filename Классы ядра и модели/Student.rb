@@ -1,10 +1,15 @@
-require 'C:\Users\maise\RubymineProjects\untitled\People.rb'
+require_relative 'C:\People.rb'
+require 'date'
+
 class Student < People
 
-  attr_reader :telephone, :telegram, :email
+  include Comparable
 
-  def initialize(first_name, second_name, third_name, id: nil, git: nil, telephone: nil, telegram: nil, email: nil)
+  attr_reader :telephone, :telegram, :email, :birthday
+
+  def initialize(first_name, second_name, third_name, id: nil, git: nil, telephone: nil, telegram: nil, email: nil, birthday: nil)
     super(first_name,second_name,third_name,id: id, git: git)
+    self.birthday = birthday
     set_contact(telephone,telegram,email)
   end
 
@@ -25,6 +30,19 @@ class Student < People
     return "ФИО:#{full_name}; Git:#{self.git}; #{get_contact[0]}:#{get_contact[1]}"
   end
 
+  def <=>(another_stud)
+    if self.birthday < another_stud.birthday
+      return -1
+    elsif self.birthday == another_stud.birthday
+      return 0
+    else
+      return 1
+    end
+  end
+
+  def birthday=(birthday)
+    @birthday = Date.parse(birthday)
+  end
   def email=(email)
     if Student.check_mail?(email)
       @email = email
@@ -47,13 +65,15 @@ class Student < People
     end
   end
 
+  private :birthday=, :telephone=, :email=, :telegram=
+
   def validate
     super
   end
 
   def Student.pars(str)
     super(str)
-    telephone, email, telegram = nil
+    telephone, email, telegram, birthday = nil
     str.split(';').each do |pars_str|
       key, val = pars_str.split(':').map(&:strip)
       case key.downcase
@@ -63,11 +83,13 @@ class Student < People
         telephone = val
       when 'telegram'
         telegram = val
+      when 'birthday'
+        birthday = val
       end
     end
-    return Student.new(super.first_name, super.second_name, super.third_name, git: super.git, id:super.id, telephone: telephone, telegram: telegram, email: email)
+    return Student.new(super.first_name, super.second_name, super.third_name, git: super.git, id:super.id, telephone: telephone, telegram: telegram, email: email, birthday: birthday)
   end
   def to_s
-    "Имя:#{self.first_name}\nФамилия:#{self.second_name}\nОтчество:#{self.third_name}\nID:#{self.id}\nТелефон:#{self.telephone}\nТелегрма:#{self.telegram}\nEmail:#{self.email}\nGit:#{self.git}\n\n\n"
+    "Имя:#{self.first_name}\nФамилия:#{self.second_name}\nОтчество:#{self.third_name}\nID:#{self.id}\nТелефон:#{self.telephone}\nТелегрма:#{self.telegram}\nEmail:#{self.email}\nGit:#{self.git}\nДата рождения:#{self.birthday}"
   end
 end
