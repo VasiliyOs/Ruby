@@ -1,14 +1,18 @@
-require 'C:\Users\maise\RubymineProjects\untitled\People.rb'
-require 'C:\Users\maise\RubymineProjects\untitled\Student.rb'
-require 'C:\Users\maise\RubymineProjects\untitled\Student_short.rb'
+require 'C:\Node.rb'
+require 'C:\Users\Василий Осипов\RubymineProjects\Tree_Stud\Student_tree.rb'
+require 'C:\People.rb'
+require 'C:\Student.rb'
 
-st1 = Student.new("Имя", "Фамилия","Отчество", id: 2, telephone: "8 800 555 35 35", telegram: "@Jack123", git: "VasiliyOs", email: "abc@mail.ru")
-st2 = Student.pars("first_name: Имя;second_name: Фамилия;third_name: Отчество;id: 3;Telephone:8 999 999 99 99; Email: abc@mail.ru; git:VasiliyOs; telegram:@Jackobs22")
-puts st1.to_s
-puts st2.to_s
+student0 = Student.new("Имя", "Фамилия","Отчество", id: 2, telephone: "8 800 555 35 35", telegram: "@Jack123", git: "VasiliyOs", email: "abc@mail.ru", birthday: '03-02-2023')
+student1 = Student.new("Имя", "Фамилия","Отчество", id: 2, telephone: "8 800 555 35 35", telegram: "@Jack123", git: "VasiliyOs", email: "abc@mail.ru", birthday: '05-05-1987')
+student2 = Student.new("Имя", "Фамилия","Отчество", id: 2, telephone: "8 800 555 35 35", telegram: "@Jack123", git: "VasiliyOs", email: "abc@mail.ru", birthday: '03-02-1999')
+student3 = Student.new("Имя", "Фамилия","Отчество", id: 2, telephone: "8 800 555 35 35", telegram: "@Jack123", git: "VasiliyOs", email: "abc@mail.ru", birthday: '09-04-2283')
+student_arr = [student0, student1, student2, student3]
 
+tree1 = Student_tree.new(student_arr)
 
-st1_s = Student_short.student_in_short_student(st1)
-puts st1_s.to_s
-st2_s =  Student_short.initialize_from_string(id: 3, string: "first_name:Имя; second_name:Фамилия; third_name: Отчество; Telephone:8 777 77 77; Email:abc@mail.ru; git:VasiliyOs; telegram:@Jackobs22")
-puts st2_s.to_s
+tree_max = tree1.max
+puts "Студент с максимальной датой:\n#{tree_max}"
+puts "\n\n\n"
+tree1.each{|node| puts node if node.value.birthday <= Date.parse('2000-01-01')}
+
