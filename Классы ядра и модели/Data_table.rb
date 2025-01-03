@@ -1,4 +1,4 @@
-class DataTable
+class Data_table
   attr_accessor :matrix
 
   private :matrix, :matrix=
@@ -8,9 +8,7 @@ class DataTable
   end
 
   def [](row_ind, column_ind)
-    if !matrix[row_ind][column_ind].nil?
-      self.matrix[row_ind][column_ind]
-    end
+    self.matrix[row_ind][column_ind]
   end
 
   def columns_count
@@ -20,9 +18,8 @@ class DataTable
   def rows_count
     self.matrix.size
   end
-
+  
   def to_s
     self.matrix.to_s
   end
 end
-
