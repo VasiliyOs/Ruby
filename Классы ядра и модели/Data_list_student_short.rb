@@ -1,13 +1,16 @@
-require 'C:\Users\Василий Осипов\Desktop\rb444\Data_list.rb'
-require 'C:\Users\Василий Осипов\Desktop\rb444\Student_short.rb'
-require 'C:\Users\Василий Осипов\Desktop\rb444\Data_table.rb'
+require_relative 'Data_list.rb'
+require_relative 'Student_short.rb'
+require_relative 'Data_table.rb'
 
-class DataListStudentShort < Data_list
-  attr_accessor :array
+class Data_list_student_short < Data_list
+  attr_accessor :array, :view, :num
 
-  private :array, :array=
   def initialize(array)
     super(array)
+  end
+
+  def set_view(view)
+    self.view = view
   end
 
   def get_value(name_atr)
@@ -21,7 +24,7 @@ class DataListStudentShort < Data_list
       end
       matrix << val_atr
     end
-    DataTable.new(matrix)
+    Data_table.new(matrix)
   end
 
   def get_names
@@ -29,6 +32,11 @@ class DataListStudentShort < Data_list
     student_short_fields += self.array[0].instance_variables
     student_short_fields.delete(:@id)
     student_short_fields
+  end
+
+  def notify
+    self.view.set_table_params(get_names, self.num)
+    self.view.set_table_data(get_value(self.get_names))
   end
 
   def get_data
